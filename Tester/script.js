@@ -21,6 +21,10 @@ export const options = {
   };
 
 export default function () {
+  // Introduce high latency
+  let latency = Math.floor(Math.random() * 1000);
+  sleep(latency);
+  
   const data = dataList[scenario.iterationInTest];
   const url = `http://${server.host}:${server.port}/${server.send_endpoint}`;
   const payload = JSON.stringify(data);
