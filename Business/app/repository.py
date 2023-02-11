@@ -37,7 +37,12 @@ URL_SAVE_RECORD: str = f'{settings.STORAGE_URL}/records'
 class RestRepository(Repository):
 
     def save(self, record: Record) -> bool:
-        response = requests.post(url=URL_SAVE_RECORD, json=record.dict())
+        i = 0
+        while i < 10:
+            try:
+                response = requests.post(url=URL_SAVE_RECORD, json=record.dict(), timeout=5)
+            except requests.exceptions.RequestException:
+                i += 1
         return Result(**response.json())
 
     def query(self, location: str, date: str) -> list[Record]:
