@@ -1,4 +1,5 @@
 # ha-network-service-codebase
+use Nginx and fastAPI
 codebase for ha network service
 
 ## Configuration
